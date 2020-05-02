@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.2;net45</TargetFrameworks>
+    <TargetFrameworks>net472;netstandard2.1</TargetFrameworks>
 	<AssemblyName>MihaZupan.TelegramBotClients</AssemblyName>
 	<LangVersion>latest</LangVersion>
     <RootNamespace>MihaZupan.TelegramBotClients</RootNamespace>
@@ -24,7 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Telegram.Bot" Version="14.3.0" />
+    <PackageReference Include="Telegram.Bot" Version="15.5.1" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">
     <Reference Include="System.Net.Http" />	

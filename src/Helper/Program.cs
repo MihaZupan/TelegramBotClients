@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using MihaZupan.Extensions;
 
 namespace MakeRequestAsyncModifier
 {
@@ -14,14 +9,14 @@ namespace MakeRequestAsyncModifier
         static void Main(string[] args)
         {
             string sourceFilePath = @"..\..\..\TelegramBotClients\BlockingClient\BlockingTelegramBotClient.cs";
-
+            
             if (!File.Exists(sourceFilePath))
             {
                 Console.WriteLine("Code file does not exist");
                 Console.ReadKey(true);
                 Environment.Exit(1);
             }
-
+            
             string backupFilePath;
             int previousBackupCount = 0;
             do
@@ -30,7 +25,7 @@ namespace MakeRequestAsyncModifier
                 previousBackupCount++;
             }
             while (File.Exists(backupFilePath));
-
+            
             File.Copy(sourceFilePath, backupFilePath);
             string code = File.ReadAllText(sourceFilePath);
             
@@ -45,9 +40,27 @@ namespace MakeRequestAsyncModifier
             }
             
             File.WriteAllText(sourceFilePath, code);
-
+            
             Console.WriteLine("Done");
             Console.ReadKey(true);
+        }
+    }
+    
+    public static class StringExtensions
+    {
+        public static int OrdinalIndexOf(this string str, string value, int startIndex)
+        {
+            return str.IndexOf(value, startIndex, StringComparison.Ordinal);
+        }
+        
+        public static int OrdinalIndexAfter(this string str, string value, int startIndex)
+        {
+            return str.IndexOf(value, startIndex, StringComparison.Ordinal) + 1;
+        }
+
+        public static string Last(this string str, int amount)
+        {
+            return amount >= str.Length ? str : str.Substring(str.Length - amount);
         }
     }
 }
